@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{1FE1A8A5-B2C7-4183-BE85-1E0484634232}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>E:\Coding\CMU\15466\nest-libs</NMakeIncludeSearchPath>
+    <NMakeAssemblySearchPath>E:\Coding\CMU\15466\nest-libs</NMakeAssemblySearchPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\Coding\CMU\15466\nest-mess</IncludePath>
+    <ReferencePath>$(VC_ReferencesPath_x86)</ReferencePath>
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\nest-libs\windows\glm\include\glm\detail\glm.cpp" />
+    <ClCompile Include="..\ColorTextureProgram.cpp" />
+    <ClCompile Include="..\GL.cpp" />
+    <ClCompile Include="..\gl_compile_program.cpp" />
+    <ClCompile Include="..\load_save_png.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\Mode.cpp" />
+    <ClCompile Include="..\PongMode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\config\ftheader.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\config\ftoption.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\freetype.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftadvanc.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftbbox.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftbdf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftbitmap.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftbzip2.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftcache.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftchapters.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftcid.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftcolor.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftdriver.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\fterrdef.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\fterrors.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftgasp.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftglyph.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftgxval.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftgzip.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftimage.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftincrem.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftlist.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftlzw.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftmac.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftmm.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftmodapi.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftmoderr.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftotval.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftoutln.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftparams.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftpfr.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftrender.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftsizes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftsnames.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftstroke.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftsynth.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftsystem.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\fttrigon.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\fttypes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\autohint.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\cffotypes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\cfftypes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftcalc.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftdebug.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftdrv.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\fthash.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftmemory.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftobjs.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftpsprop.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftrfork.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftserv.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftstream.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\fttrace.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\ftvalid.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\internal.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\psaux.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\pshints.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svcid.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svkern.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svmetric.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svmm.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svotval.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svprop.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\sfnt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\t1types.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\tttypes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\internal\wofftypes.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\t1tables.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\ttnameid.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\tttables.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\freetype\tttags.h" />
+    <ClInclude Include="..\..\nest-libs\windows\freetype\include\ft2build.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\compute_common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\compute_vector_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\qualifier.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\setup.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_float.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_half.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_quat.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_features.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_fixes.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_noise.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_swizzle.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_swizzle_func.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\detail\_vectorize.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\exponential.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_clip_space.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double2x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double3x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_double4x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float2x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float3x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_float4x4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_projection.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_transform.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_double.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_double_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_exponential.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_float.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_float_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_geometric.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_transform.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_trigonometric.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_constants.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_int_sized.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_uint_sized.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_ulp.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool1_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_bool4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double1_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_double4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float1_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_float4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int1_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_int4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint1_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint2_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint3_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_uint4_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_ulp.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\fwd.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\geometric.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\glm.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\bitfield.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\color_space.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\constants.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\epsilon.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_access.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_inverse.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_transform.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\noise.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\packing.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\quaternion.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\random.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\reciprocal.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\round.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\type_aligned.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\type_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\type_ptr.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\ulp.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtc\vec1.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\associated_min_max.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\bit.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\closest_point.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_encoding.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_space.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_space_YCoCg.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\common.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\compatibility.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\component_wise.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\dual_quaternion.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\easing.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\euler_angles.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\extend.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\extended_min_max.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\exterior_product.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_exponential.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_square_root.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_trigonometry.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\functions.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\gradient_paint.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\handed_coordinate_space.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\hash.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\intersect.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\io.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\log_base.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_cross_product.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_decompose.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_factorisation.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_interpolation.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_major_storage.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_operation.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_query.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_transform_2d.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\mixed_product.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\norm.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\normal.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\normalize_dot.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\number_precision.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\optimum_pow.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\orthonormalize.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\perpendicular.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\polar_coordinates.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\projection.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\quaternion.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\range.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\raw_data.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\rotate_normalized_axis.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\rotate_vector.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\scalar_multiplication.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\scalar_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\spline.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\std_based_type.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\string_cast.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\texture.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\transform.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\transform2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\type_aligned.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\type_trait.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_angle.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_query.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\vec_swizzle.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\gtx\wrap.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\integer.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat2x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat2x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat2x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat3x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat3x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat3x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat4x2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat4x3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\mat4x4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\matrix.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\packing.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\common.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\exponential.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\geometric.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\integer.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\matrix.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\neon.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\packing.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\platform.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\trigonometric.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\simd\vector_relational.h" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\trigonometric.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\vec2.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\vec3.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\vec4.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\glm\include\glm\vector_relational.hpp" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-aat-layout.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-aat.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-blob.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-buffer.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-common.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-deprecated.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-face.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-font.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ft.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-map.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-color.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-deprecated.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-font.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-layout.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-math.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-meta.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-metrics.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-name.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-shape.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot-var.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-ot.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-set.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-shape-plan.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-shape.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-unicode.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb-version.h" />
+    <ClInclude Include="..\..\nest-libs\windows\harfbuzz\include\hb.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libogg\include\ogg\ogg.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libogg\include\ogg\os_types.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopusenc\include\opusenc.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopus\include\opus.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopus\include\opus_defines.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopus\include\opus_multistream.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopus\include\opus_projection.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libopus\include\opus_types.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libpng\include\png.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libpng\include\pngconf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\libpng\include\pnglibconf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\opusfile\include\opusfile.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\begin_code.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\close_code.h" />
+    <ClInclude Include="..\..\nest-libs\windows\SDL2\include\SDL.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_assert.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_atomic.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_audio.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_bits.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_blendmode.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_clipboard.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_android.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_iphoneos.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_macosx.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_minimal.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_os2.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_pandora.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_psp.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_windows.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_winrt.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_config_wiz.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_copying.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_cpuinfo.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_egl.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_endian.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_error.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_events.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_filesystem.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_gamecontroller.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_gesture.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_haptic.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_hints.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_joystick.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_keyboard.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_keycode.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_loadso.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_log.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_main.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_messagebox.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_mouse.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_mutex.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_name.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengl.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles2.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles2_gl2.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles2_gl2ext.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles2_gl2platform.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengles2_khrplatform.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_opengl_glext.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_pixels.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_platform.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_power.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_quit.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_rect.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_render.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_revision.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_rwops.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_scancode.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_sensor.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_shape.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_stdinc.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_surface.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_system.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_syswm.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_assert.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_common.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_compare.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_crc32.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_font.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_fuzzer.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_harness.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_images.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_log.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_md5.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_memory.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_test_random.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_thread.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_timer.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_touch.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_types.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_version.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_video.h" />
+    <ClInclude Include="..\..\nest-libs\windows\sdl2\include\SDL_vulkan.h" />
+    <ClInclude Include="..\..\nest-libs\windows\zlib\include\zconf.h" />
+    <ClInclude Include="..\..\nest-libs\windows\zlib\include\zlib.h" />
+    <ClInclude Include="..\ColorTextureProgram.hpp" />
+    <ClInclude Include="..\GL.hpp" />
+    <ClInclude Include="..\glcorearb.h" />
+    <ClInclude Include="..\gl_compile_program.hpp" />
+    <ClInclude Include="..\gl_errors.hpp" />
+    <ClInclude Include="..\load_save_png.hpp" />
+    <ClInclude Include="..\Mode.hpp" />
+    <ClInclude Include="..\PongMode.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_common_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_exponential.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_exponential_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_geometric.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_geometric_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_integer.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_integer_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_matrix.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_matrix_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_packing.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_packing_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_trigonometric.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_trigonometric_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_vector_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\func_vector_relational_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_half.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x2.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x3.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat2x4.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x2.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x3.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat3x4.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x2.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x3.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x4.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_mat4x4_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_quat.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_quat_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec1.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec2.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec3.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec4.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\detail\type_vec4_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_clip_space.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_projection.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\matrix_transform.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_common_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_exponential.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_geometric.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_transform.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\quaternion_trigonometric.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_constants.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_integer.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\scalar_ulp.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_integer.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\ext\vector_ulp.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\bitfield.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\color_space.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\constants.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\epsilon.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\integer.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_access.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_inverse.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\matrix_transform.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\noise.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\packing.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\quaternion.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\quaternion_simd.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\random.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\reciprocal.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\round.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\type_precision.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\type_ptr.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtc\ulp.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\associated_min_max.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\bit.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\closest_point.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_encoding.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_space.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\color_space_YCoCg.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\common.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\compatibility.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\component_wise.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\dual_quaternion.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\easing.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\euler_angles.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\extend.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\extended_min_max.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\exterior_product.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_exponential.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_square_root.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\fast_trigonometry.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\float_notmalize.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\functions.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\gradient_paint.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\handed_coordinate_space.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\hash.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\integer.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\intersect.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\io.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\log_base.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_cross_product.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_decompose.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_factorisation.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_interpolation.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_major_storage.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_operation.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_query.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\matrix_transform_2d.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\mixed_product.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\norm.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\normal.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\normalize_dot.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\number_precision.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\optimum_pow.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\orthonormalize.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\perpendicular.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\polar_coordinates.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\projection.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\quaternion.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\raw_data.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\rotate_normalized_axis.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\rotate_vector.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\scalar_relational.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\spline.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\std_based_type.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\string_cast.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\texture.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\transform.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\transform2.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\type_aligned.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\type_trait.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_angle.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_query.inl" />
+    <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\wrap.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
