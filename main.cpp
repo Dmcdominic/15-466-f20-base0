@@ -47,9 +47,9 @@ int main(int argc, char **argv) {
 
 	//create window:
 	SDL_Window *window = SDL_CreateWindow(
-		"Skies of Pongora", //TODO: remember to set a title for your game!
+		"Skies of Pongora", //Remember to change title_cycle in PongMode.hpp if you change this
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		640, 480, //TODO: modify window size if you'd like
+		640, 480, //window size
 		SDL_WINDOW_OPENGL
 		| SDL_WINDOW_RESIZABLE //uncomment to allow resizing
 		| SDL_WINDOW_ALLOW_HIGHDPI //uncomment for full resolution on high-DPI screens
@@ -175,11 +175,10 @@ int main(int argc, char **argv) {
 				updated_window = true;
 			}
 			//set new window title
-			//if (strcmp(*window_settings.title, *window_title) != 0) {
-				//std::cout << "set new window title!!!\n";
+			if (strcmp(*window_settings.title, *window_title) != 0) {
 				SDL_SetWindowTitle(window, *window_settings.title);
 				*window_title = *window_settings.title;
-			//}
+			}
 			if (updated_window) {
 				on_resize();
 			}

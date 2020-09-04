@@ -25,7 +25,7 @@ struct PongMode : Mode {
 	//----- settings -----
 
 	const float d_court_radius_per_bounce = 0.3f;
-	const int d_window_size_per_bounce = 8;
+	const int d_window_size_per_bounce = 28;
 
 	const char *title_cycle[4] = {
 		"Skies of Pongora   <(^o^<)",

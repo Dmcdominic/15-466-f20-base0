@@ -217,6 +217,7 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		court_radius.y += d_court_radius_per_bounce;
 		window_settings.size.y += d_window_size_per_bounce;
 		window_settings.position.y -= d_window_size_per_bounce;
+		cycle_title(window_settings);
 		// TODO - need some offset to de-center things?
 	}
 	if (ball.y < -court_radius.y + ball_radius.y) {
@@ -227,6 +228,7 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		//extend wall downward.
 		court_radius.y += d_court_radius_per_bounce;
 		window_settings.size.y += d_window_size_per_bounce;
+		cycle_title(window_settings);
 	}
 
 	if (ball.x > court_radius.x - ball_radius.x) {
@@ -238,6 +240,7 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		//extend wall right.
 		court_radius.x += d_court_radius_per_bounce;
 		window_settings.size.x += d_window_size_per_bounce;
+		cycle_title(window_settings);
 	}
 	if (ball.x < -court_radius.x + ball_radius.x) {
 		ball.x = -court_radius.x + ball_radius.x;
@@ -249,6 +252,7 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		court_radius.x += d_court_radius_per_bounce;
 		window_settings.size.x += d_window_size_per_bounce;
 		window_settings.position.x -= d_window_size_per_bounce;
+		cycle_title(window_settings);
 	}
 
 	//----- rainbow trails -----
@@ -270,19 +274,15 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 void PongMode::cycle_title(Mode::Window_settings &window_settings) {
 	//update window name
 	if (window_settings.title == NULL) {
-		std::cout << "null\n";
 		window_settings.title = &title_cycle[0];
 		return;
 	}
 	int num_titles = sizeof(title_cycle)/sizeof(title_cycle[0]);
 	for (int n = 0; n < num_titles; n++) {
-		//if (*window_settings.title == title_cycle[n]) {
-		if (strcmp(*window_settings.title, title_cycle[n]) == 0) {
-			std::cout << "strcmp passed!!!!!!\n";
-			*window_settings.title = title_cycle[(n + 1) % num_titles];
+		if (*window_settings.title == title_cycle[n]) {
+			window_settings.title = &title_cycle[(n + 1) % num_titles];
 			return;
 		}
-		std::cout << "strcmp no pass :(\n";
 	}
 	window_settings.title = &title_cycle[0];
 }
