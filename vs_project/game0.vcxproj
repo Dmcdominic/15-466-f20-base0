@@ -693,6 +693,7 @@
     <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_angle.inl" />
     <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\vector_query.inl" />
     <None Include="..\..\nest-libs\windows\glm\include\glm\gtx\wrap.inl" />
+    <None Include="..\Jamfile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

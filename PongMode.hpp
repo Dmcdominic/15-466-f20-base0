@@ -18,8 +18,21 @@ struct PongMode : Mode {
 
 	//functions called by main loop:
 	virtual bool handle_event(SDL_Event const &, glm::uvec2 const &window_size) override;
-	virtual void update(float elapsed) override;
+	virtual void update(float elapsed, Window_settings& window_settings) override;
+	virtual void cycle_title(Mode::Window_settings &window_settings);
 	virtual void draw(glm::uvec2 const &drawable_size) override;
+
+	//----- settings -----
+
+	const float d_court_radius_per_bounce = 0.3f;
+	const int d_window_size_per_bounce = 8;
+
+	const char *title_cycle[4] = {
+		"Skies of Pongora   <(^o^<)",
+		"Skies of Pongora    <(^o^)>",
+		"Skies of Pongora     (>^o^)>",
+		"Skies of Pongora    <(^o^)>"
+	};
 
 	//----- game state -----
 

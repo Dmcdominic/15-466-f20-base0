@@ -8,6 +8,16 @@
 struct Mode : std::enable_shared_from_this< Mode > {
 	virtual ~Mode() { }
 
+	//struct for the mode to tell main how to update the window, if desired
+	struct Window_settings {
+		Window_settings(glm::uvec2 size_, glm::uvec2 position_, const char **title_) :
+			size(size_), position(position_), title(title_) { }
+		glm::uvec2 size;
+		glm::uvec2 position;
+		const char **title;
+	};
+
+
 	//handle_event is called when new mouse or keyboard events are received:
 	// (note that this might be many times per frame or never)
 	//The function should return 'true' if it handled the event.
@@ -15,7 +25,7 @@ struct Mode : std::enable_shared_from_this< Mode > {
 
 	//update is called at the start of a new frame, after events are handled:
 	// 'elapsed' is time in seconds since the last call to 'update'
-	virtual void update(float elapsed) { }
+	virtual void update(float elapsed, Window_settings &window_settings) { }
 
 	//draw is called after update:
 	virtual void draw(glm::uvec2 const &drawable_size) = 0;

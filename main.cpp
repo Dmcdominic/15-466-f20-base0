@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
 
 	//create window:
 	SDL_Window *window = SDL_CreateWindow(
-		"gp20 pong", //TODO: remember to set a title for your game!
+		"Skies of Pongora", //TODO: remember to set a title for your game!
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		640, 480, //TODO: modify window size if you'd like
 		SDL_WINDOW_OPENGL
@@ -92,14 +92,20 @@ int main(int argc, char **argv) {
 	//------------ main loop ------------
 
 	//this inline function will be called whenever the window is resized,
-	// and will update the window_size and drawable_size variables:
+	// and will update the window_size, window_position, and drawable_size variables:
 	glm::uvec2 window_size; //size of window (layout pixels)
+	glm::uvec2 window_position; //position of window
+	const char *window_title_literal = SDL_GetWindowTitle(window);
+	const char **window_title = &window_title_literal; //title of window
 	glm::uvec2 drawable_size; //size of drawable (physical pixels)
 	//On non-highDPI displays, window_size will always equal drawable_size.
 	auto on_resize = [&](){
 		int w,h;
+		int x,y;
 		SDL_GetWindowSize(window, &w, &h);
+		SDL_GetWindowPosition(window, &x, &y);
 		window_size = glm::uvec2(w, h);
+		window_position = glm::uvec2(x, y);
 		SDL_GL_GetDrawableSize(window, &w, &h);
 		drawable_size = glm::uvec2(w, h);
 		glViewport(0, 0, drawable_size.x, drawable_size.y);
@@ -153,7 +159,30 @@ int main(int argc, char **argv) {
 			//lag to avoid spiral of death:
 			elapsed = std::min(0.1f, elapsed);
 
-			Mode::current->update(elapsed);
+			//set the new window size & position, if the update function requested it.
+			Mode::Window_settings window_settings = Mode::Window_settings(window_size, window_position, window_title);
+			Mode::current->update(elapsed, window_settings);
+
+			bool updated_window = false;
+			//set new window position
+			if (window_settings.position != window_position) {
+				SDL_SetWindowPosition(window, window_settings.position.x, window_settings.position.y);
+				updated_window = true;
+			}
+			//set new window size
+			if (window_settings.size != window_size) {
+				SDL_SetWindowSize(window, window_settings.size.x, window_settings.size.y);
+				updated_window = true;
+			}
+			//set new window title
+			//if (strcmp(*window_settings.title, *window_title) != 0) {
+				//std::cout << "set new window title!!!\n";
+				SDL_SetWindowTitle(window, *window_settings.title);
+				*window_title = *window_settings.title;
+			//}
+			if (updated_window) {
+				on_resize();
+			}
 			if (!Mode::current) break;
 		}
 

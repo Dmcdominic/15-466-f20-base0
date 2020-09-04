@@ -131,7 +131,7 @@ bool PongMode::handle_event(SDL_Event const &evt, glm::uvec2 const &window_size)
 	return false;
 }
 
-void PongMode::update(float elapsed) {
+void PongMode::update(float elapsed, Window_settings& window_settings) {
 
 	static std::mt19937 mt; //mersenne twister pseudo-random number generator
 
@@ -171,7 +171,7 @@ void PongMode::update(float elapsed) {
 	//---- collision handling ----
 
 	//paddles:
-	auto paddle_vs_ball = [this](glm::vec2 const &paddle) {
+	auto paddle_vs_ball = [this,&window_settings](glm::vec2 const &paddle) {
 		//compute area of overlap:
 		glm::vec2 min = glm::max(paddle - paddle_radius, ball - ball_radius);
 		glm::vec2 max = glm::min(paddle + paddle_radius, ball + ball_radius);
@@ -201,6 +201,8 @@ void PongMode::update(float elapsed) {
 			float vel = (ball.y - paddle.y) / (paddle_radius.y + ball_radius.y);
 			ball_velocity.y = glm::mix(ball_velocity.y, vel, 0.75f);
 		}
+
+		cycle_title(window_settings);
 	};
 	paddle_vs_ball(left_paddle);
 	paddle_vs_ball(right_paddle);
@@ -211,12 +213,20 @@ void PongMode::update(float elapsed) {
 		if (ball_velocity.y > 0.0f) {
 			ball_velocity.y = -ball_velocity.y;
 		}
+		//extend wall upward.
+		court_radius.y += d_court_radius_per_bounce;
+		window_settings.size.y += d_window_size_per_bounce;
+		window_settings.position.y -= d_window_size_per_bounce;
+		// TODO - need some offset to de-center things?
 	}
 	if (ball.y < -court_radius.y + ball_radius.y) {
 		ball.y = -court_radius.y + ball_radius.y;
 		if (ball_velocity.y < 0.0f) {
 			ball_velocity.y = -ball_velocity.y;
 		}
+		//extend wall downward.
+		court_radius.y += d_court_radius_per_bounce;
+		window_settings.size.y += d_window_size_per_bounce;
 	}
 
 	if (ball.x > court_radius.x - ball_radius.x) {
@@ -225,6 +235,9 @@ void PongMode::update(float elapsed) {
 			ball_velocity.x = -ball_velocity.x;
 			left_score += 1;
 		}
+		//extend wall right.
+		court_radius.x += d_court_radius_per_bounce;
+		window_settings.size.x += d_window_size_per_bounce;
 	}
 	if (ball.x < -court_radius.x + ball_radius.x) {
 		ball.x = -court_radius.x + ball_radius.x;
@@ -232,6 +245,10 @@ void PongMode::update(float elapsed) {
 			ball_velocity.x = -ball_velocity.x;
 			right_score += 1;
 		}
+		//extend wall left.
+		court_radius.x += d_court_radius_per_bounce;
+		window_settings.size.x += d_window_size_per_bounce;
+		window_settings.position.x -= d_window_size_per_bounce;
 	}
 
 	//----- rainbow trails -----
@@ -248,6 +265,26 @@ void PongMode::update(float elapsed) {
 	while (ball_trail.size() >= 2 && ball_trail[1].z > trail_length) {
 		ball_trail.pop_front();
 	}
+}
+
+void PongMode::cycle_title(Mode::Window_settings &window_settings) {
+	//update window name
+	if (window_settings.title == NULL) {
+		std::cout << "null\n";
+		window_settings.title = &title_cycle[0];
+		return;
+	}
+	int num_titles = sizeof(title_cycle)/sizeof(title_cycle[0]);
+	for (int n = 0; n < num_titles; n++) {
+		//if (*window_settings.title == title_cycle[n]) {
+		if (strcmp(*window_settings.title, title_cycle[n]) == 0) {
+			std::cout << "strcmp passed!!!!!!\n";
+			*window_settings.title = title_cycle[(n + 1) % num_titles];
+			return;
+		}
+		std::cout << "strcmp no pass :(\n";
+	}
+	window_settings.title = &title_cycle[0];
 }
 
 void PongMode::draw(glm::uvec2 const &drawable_size) {
