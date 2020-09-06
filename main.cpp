@@ -92,9 +92,10 @@ int main(int argc, char **argv) {
 	//------------ main loop ------------
 
 	//this inline function will be called whenever the window is resized,
-	// and will update the window_size, window_position, and drawable_size variables:
+	// and will update the window_size, window_position, window_opacity, and drawable_size variables:
 	glm::uvec2 window_size; //size of window (layout pixels)
 	glm::uvec2 window_position; //position of window
+	float window_opacity; //opacity of window
 	const char *window_title_literal = SDL_GetWindowTitle(window);
 	const char **window_title = &window_title_literal; //title of window
 	glm::uvec2 drawable_size; //size of drawable (physical pixels)
@@ -104,6 +105,7 @@ int main(int argc, char **argv) {
 		int x,y;
 		SDL_GetWindowSize(window, &w, &h);
 		SDL_GetWindowPosition(window, &x, &y);
+		SDL_GetWindowOpacity(window, &window_opacity);
 		window_size = glm::uvec2(w, h);
 		window_position = glm::uvec2(x, y);
 		SDL_GL_GetDrawableSize(window, &w, &h);
@@ -160,7 +162,7 @@ int main(int argc, char **argv) {
 			elapsed = std::min(0.1f, elapsed);
 
 			//set the new window size & position, if the update function requested it.
-			Mode::Window_settings window_settings = Mode::Window_settings(window_size, window_position, window_title);
+			Mode::Window_settings window_settings = Mode::Window_settings(window_size, window_position, window_opacity, window_title);
 			Mode::current->update(elapsed, window_settings);
 
 			bool updated_window = false;
@@ -172,6 +174,11 @@ int main(int argc, char **argv) {
 			//set new window size
 			if (window_settings.size != window_size) {
 				SDL_SetWindowSize(window, window_settings.size.x, window_settings.size.y);
+				updated_window = true;
+			}
+			//set new window opacity
+			if (window_settings.opacity != window_opacity) {
+				SDL_SetWindowOpacity(window, window_settings.opacity);
 				updated_window = true;
 			}
 			//set new window title

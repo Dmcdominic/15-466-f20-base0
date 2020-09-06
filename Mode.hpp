@@ -10,10 +10,11 @@ struct Mode : std::enable_shared_from_this< Mode > {
 
 	//struct for the mode to tell main how to update the window, if desired
 	struct Window_settings {
-		Window_settings(glm::uvec2 size_, glm::uvec2 position_, const char **title_) :
-			size(size_), position(position_), title(title_) { }
+		Window_settings(glm::uvec2 size_, glm::uvec2 position_, float opacity_, const char **title_) :
+			size(size_), position(position_), opacity(opacity_), title(title_) { }
 		glm::uvec2 size;
 		glm::uvec2 position;
+		float opacity;
 		const char **title;
 	};
 
