@@ -49,7 +49,8 @@ int main(int argc, char **argv) {
 	SDL_Window *window = SDL_CreateWindow(
 		"Skies of Pongora", //Remember to change title_cycle in PongMode.hpp if you change this
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		640, 480, //window size
+		//640, 480,
+		800, 800, //window size
 		SDL_WINDOW_OPENGL
 		| SDL_WINDOW_RESIZABLE //uncomment to allow resizing
 		| SDL_WINDOW_ALLOW_HIGHDPI //uncomment for full resolution on high-DPI screens

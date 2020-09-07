@@ -21,6 +21,7 @@ struct PongMode : Mode {
 	virtual void update_mouse_pos(glm::vec2 const& new_mouse_pos, glm::uvec2 const& window_size);
 	virtual void update(float elapsed, Window_settings& window_settings) override;
 	virtual void cycle_title(Mode::Window_settings &window_settings);
+	virtual glm::u8vec4 rand_color();
 	virtual void draw(glm::uvec2 const &drawable_size) override;
 
 	//----- settings -----
@@ -37,8 +38,8 @@ struct PongMode : Mode {
 
 	// POIs
 	const float POI_radius = 5.0f;
-	const float POI_opacity_radius_inner = 0.5f;
-	const float POI_opacity_radius_outer = 2.0f;
+	const float POI_opacity_radius_inner = 0.25f;
+	const float POI_opacity_radius_outer = 1.5f;
 
 	struct POI {
 		POI(glm::vec2 const& Position_, float Radius_) :
@@ -65,11 +66,12 @@ struct PongMode : Mode {
 		bool deleted = false;
 	};
 	std::vector< Brick > bricks;
+	std::vector< Brick > bricks_flipped;
 
 	//----- game state -----
 
-	glm::vec2 base_court_radius = glm::vec2(8.0f, 6.0f);
-	glm::vec2 extreme_radius = glm::vec2(40.0f, 30.0f);
+	glm::vec2 base_court_radius = glm::vec2(7.0f, 7.0f);
+	glm::vec2 extreme_radius = glm::vec2(24.0f, 24.0f);
 	glm::vec2 vert_paddle_radius = glm::vec2(0.2f, 1.0f);
 	glm::vec2 horiz_paddle_radius = glm::vec2(1.0f, 0.2f);
 	glm::vec2 ball_radius = glm::vec2(0.2f, 0.2f);
@@ -79,8 +81,15 @@ struct PongMode : Mode {
 	glm::vec2 bottom_paddle = glm::vec2(0.0f, -base_court_radius.y + 0.5f);
 	glm::vec2 top_paddle = glm::vec2(0.0f, base_court_radius.y - 0.5f);
 
+	glm::vec2 block_dist = base_court_radius + glm::vec2(brick_layer_height, brick_layer_height) + 0.5f * (extreme_radius - (base_court_radius + glm::vec2(brick_layer_height, brick_layer_height)));
+	glm::vec2 block_radius = 0.5f * (extreme_radius - (base_court_radius + glm::vec2(brick_layer_height, brick_layer_height)));
+	glm::vec2 TR_block = glm::vec2( block_dist.x, block_dist.y);
+	glm::vec2 BR_block = glm::vec2( block_dist.x,-block_dist.y);
+	glm::vec2 BL_block = glm::vec2(-block_dist.x,-block_dist.y);
+	glm::vec2 TL_block = glm::vec2(-block_dist.x, block_dist.y);
+
 	glm::vec2 ball = glm::vec2(0.0f, 0.0f);
-	glm::vec2 ball_velocity = glm::vec2(-1.0f, 0.0f);
+	glm::vec2 ball_velocity = glm::vec2(0.0, 1.0f);
 
 	glm::vec2 absolute_mouse_pos = glm::vec2(0.0f, 0.0f);
 	glm::vec2 relative_mouse_pos = glm::vec2(0.0f, 0.0f);
@@ -98,6 +107,9 @@ struct PongMode : Mode {
 	float ai_offset_update = 0.0f;*/
 
 	bool state_flipped = false;
+	bool state_rainbow = false;
+
+	glm::u8vec4 rand_colors[10];
 
 	//----- pretty rainbow trails -----
 

@@ -15,8 +15,16 @@ PongMode::PongMode() {
 	ball_trail.emplace_back(ball, trail_length);
 	ball_trail.emplace_back(ball, 0.0f);
 
+	// initialize rand_colors
+	for (int i = 0; i < sizeof(rand_colors) / sizeof(rand_colors[0]); i++) {
+		rand_colors[i] = rand_color();
+	}
+
 	// Set up POIs
-	POIs.emplace_back(glm::vec2(0.0f, 10.0f), POI_radius);
+	POIs.emplace_back(glm::vec2(0.0f, 18.0f), POI_radius);
+	POI rainbow_POI = POI(glm::vec2(0.0f, -18.0f), POI_radius);
+	rainbow_POI.rainbow = true;
+	POIs.emplace_back(rainbow_POI);
 
 	// TODO - more POIs?
 
@@ -29,6 +37,10 @@ PongMode::PongMode() {
 			bricks.emplace_back(glm::vec2(-x, y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
 			bricks.emplace_back(glm::vec2( x,-y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
 			bricks.emplace_back(glm::vec2(-x,-y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(x, y), glm::vec2(brick_height / 2.0f, brick_height / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(-x, y), glm::vec2(brick_height / 2.0f, brick_width / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(x, -y), glm::vec2(brick_height / 2.0f, brick_width / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(-x, -y), glm::vec2(brick_height / 2.0f, brick_height / 2.0f));
 		}
 	}
 	// Left & Right
@@ -38,6 +50,10 @@ PongMode::PongMode() {
 			bricks.emplace_back(glm::vec2(-x, y), glm::vec2(brick_height / 2.0f, brick_width / 2.0f));
 			bricks.emplace_back(glm::vec2(x, -y), glm::vec2(brick_height / 2.0f, brick_width / 2.0f));
 			bricks.emplace_back(glm::vec2(-x, -y), glm::vec2(brick_height / 2.0f, brick_width / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(x, y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(-x, y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(x, -y), glm::vec2(brick_width / 2.0f, brick_height / 2.0f));
+			bricks_flipped.emplace_back(glm::vec2(-x, -y), glm::vec2(brick_height / 2.0f, brick_height / 2.0f));
 		}
 	}
 
@@ -237,6 +253,14 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 				ball.y = rect.y - radius.y - ball_radius.y;
 				ball_velocity.y = -std::abs(ball_velocity.y);
 			}
+			//warp x velocity based on offset from paddle center:
+			if (velo_warp) {
+				float og_speed = sqrt(ball_velocity.x * ball_velocity.x + ball_velocity.y * ball_velocity.y);
+				float vel = (ball.x - rect.x) / (radius.x + ball_radius.x);
+				ball_velocity.x = glm::mix(ball_velocity.x, vel, 0.75f);
+				ball_velocity /= sqrt(ball_velocity.x * ball_velocity.x + ball_velocity.y * ball_velocity.y);
+				ball_velocity *= og_speed;
+			}
 		} else {
 			//wider overlap in y => bounce in x direction:
 			if (ball.x > rect.x) {
@@ -270,15 +294,24 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		if (dist > radius) {
 			return false;
 		}
-		glm::vec2 displac_norm = displac / dist;
 		// Update velocity
-		float dot_product = ball_velocity.x * displac_norm.x + ball_velocity.y * displac_norm.y;
-		glm::vec2 projection = dot_product * displac_norm;
-		ball_velocity -= projection * 2.0f;
-		ball = circle - displac_norm * radius;
+		glm::vec2 displac_norm = displac / dist;
+		if (poi != NULL && poi->rainbow) {
+			state_rainbow = !state_rainbow;
+		}
 		if (poi != NULL && poi->flip) {
 			state_flipped = !state_flipped;
+			ball_velocity = -ball_velocity;
+			//set up trail as if ball has been here for 'forever':
+			ball_trail.clear();
+			ball_trail.emplace_back(ball, trail_length);
+			ball_trail.emplace_back(ball, 0.0f);
+		} else {
+			float dot_product = ball_velocity.x * displac_norm.x + ball_velocity.y * displac_norm.y;
+			glm::vec2 projection = dot_product * displac_norm;
+			ball_velocity -= projection * 2.0f;
 		}
+		ball = circle - displac_norm * radius;
 		cycle_title(window_settings);
 		return true;
 	};
@@ -290,12 +323,23 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 	rect_vs_ball(top_paddle, horiz_paddle_radius, true);
 
 	// Check brick collisions with ball
-	for (auto bricks_iter = bricks.begin(); bricks_iter != bricks.end(); bricks_iter++) {
-		if (!(*bricks_iter).deleted) {
-			if (rect_vs_ball((*bricks_iter).Position, (*bricks_iter).Radius, false)) {
-				(*bricks_iter).deleted = true;
+	if (state_flipped) {
+		for (auto bricks_iter = bricks_flipped.begin(); bricks_iter != bricks_flipped.end(); bricks_iter++) {
+			if (!(*bricks_iter).deleted) {
+				if (rect_vs_ball((*bricks_iter).Position, (*bricks_iter).Radius, false)) {
+					(*bricks_iter).deleted = true;
+				}
 			}
 		}
+	} else {
+		for (auto bricks_iter = bricks.begin(); bricks_iter != bricks.end(); bricks_iter++) {
+			if (!(*bricks_iter).deleted) {
+				if (rect_vs_ball((*bricks_iter).Position, (*bricks_iter).Radius, false)) {
+					(*bricks_iter).deleted = true;
+				}
+			}
+		}
+
 	}
 
 	// Check POI collisions with ball
@@ -304,6 +348,12 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 		circle_vs_ball((*POI_iter).Position, (*POI_iter).Radius, &(*POI_iter));
 	}
 
+	// Corner blocks
+	rect_vs_ball(TR_block, block_radius, false);
+	rect_vs_ball(BR_block, block_radius, false);
+	rect_vs_ball(BL_block, block_radius, false);
+	rect_vs_ball(TL_block, block_radius, false);
+
 	//court extremeties:
 	if (ball.y > extreme_radius.y - ball_radius.y) {
 		ball.y = extreme_radius.y - ball_radius.y;
@@ -311,10 +361,10 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 			ball_velocity.y = -ball_velocity.y;
 		}
 		//extend wall upward.
-		camera_bounds_max.y += d_camera_bounds_per_bounce;
+		/*camera_bounds_max.y += d_camera_bounds_per_bounce;
 		camera_pos.y += d_camera_bounds_per_bounce * 0.5f;
 		window_settings.size.y += d_window_size_per_bounce;
-		window_settings.position.y -= d_window_size_per_bounce;
+		window_settings.position.y -= d_window_size_per_bounce;*/
 		cycle_title(window_settings);
 	}
 	if (ball.y < -extreme_radius.y + ball_radius.y) {
@@ -323,9 +373,9 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 			ball_velocity.y = -ball_velocity.y;
 		}
 		//extend wall downward.
-		camera_bounds_min.y -= d_camera_bounds_per_bounce;
+		/*camera_bounds_min.y -= d_camera_bounds_per_bounce;
 		camera_pos.y -= d_camera_bounds_per_bounce * 0.5f;
-		window_settings.size.y += d_window_size_per_bounce;
+		window_settings.size.y += d_window_size_per_bounce;*/
 		cycle_title(window_settings);
 	}
 
@@ -335,9 +385,9 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 			ball_velocity.x = -ball_velocity.x;
 		}
 		//extend wall right.
-		camera_bounds_max.x += d_camera_bounds_per_bounce;
+		/*camera_bounds_max.x += d_camera_bounds_per_bounce;
 		camera_pos.x += d_camera_bounds_per_bounce * 0.5f;
-		window_settings.size.x += d_window_size_per_bounce;
+		window_settings.size.x += d_window_size_per_bounce;*/
 		cycle_title(window_settings);
 	}
 	if (ball.x < -extreme_radius.x + ball_radius.x) {
@@ -346,10 +396,10 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 			ball_velocity.x = -ball_velocity.x;
 		}
 		//extend wall left.
-		camera_bounds_min.x -= d_camera_bounds_per_bounce;
+		/*camera_bounds_min.x -= d_camera_bounds_per_bounce;
 		camera_pos.x -= d_camera_bounds_per_bounce * 0.5f;
 		window_settings.size.x += d_window_size_per_bounce;
-		window_settings.position.x -= d_window_size_per_bounce;
+		window_settings.position.x -= d_window_size_per_bounce;*/
 		cycle_title(window_settings);
 	}
 
@@ -370,6 +420,10 @@ void PongMode::update(float elapsed, Window_settings& window_settings) {
 }
 
 void PongMode::cycle_title(Mode::Window_settings &window_settings) {
+	//cycle rand_colors too
+	for (int i = 0; i < sizeof(rand_colors) / sizeof(rand_colors[0]); i++) {
+		rand_colors[i] = rand_color();
+	}
 	//update window name
 	if (window_settings.title == NULL) {
 		window_settings.title = &title_cycle[0];
@@ -385,25 +439,32 @@ void PongMode::cycle_title(Mode::Window_settings &window_settings) {
 	window_settings.title = &title_cycle[0];
 }
 
+glm::u8vec4 PongMode::rand_color() {
+	return glm::u8vec4(glm::u8(rand()), glm::u8(rand()), glm::u8(rand()), 0xff);
+}
+
 void PongMode::draw(glm::uvec2 const &drawable_size) {
 	//some nice colors from the course web page:
-	#define HEX_TO_U8VEC4( HX ) (glm::u8vec4( (HX >> 24) & 0xff, (HX >> 16) & 0xff, (HX >> 8) & 0xff, (HX) & 0xff ))
-	const glm::u8vec4 bg_color = HEX_TO_U8VEC4(0x171714ff);
-	const glm::u8vec4 fg_color = HEX_TO_U8VEC4(0xd1bb54ff);
-	const glm::u8vec4 brick_color = HEX_TO_U8VEC4(0x03fca1ff);
+	#define HEX_TO_U8VEC4( HX ) (state_flipped ? (~glm::u8vec4(HX >> 24, HX >> 16, HX >> 8, ~HX)) : (glm::u8vec4(HX >> 24, HX >> 16, HX >> 8, HX)) )
+	const glm::u8vec4 bg_color = state_rainbow ? (rand_colors[0]) : HEX_TO_U8VEC4(0x76BED0ff);
+	const glm::u8vec4 ball_color = state_rainbow ? (rand_colors[1]) : HEX_TO_U8VEC4(0xEEE5E9ff);
+	const glm::u8vec4 paddle_color = state_rainbow ? (rand_colors[2]) : HEX_TO_U8VEC4(0xA9FDACff);
+	const glm::u8vec4 brick_color = state_rainbow ? (rand_colors[3]) : HEX_TO_U8VEC4(0x1F2F16ff);
+	const glm::u8vec4 shadow_color = state_rainbow ? (rand_colors[4]) : HEX_TO_U8VEC4(0xCCC5C9f0);
+	const glm::u8vec4 shadow_color_2 = state_rainbow ? (rand_colors[5]) : HEX_TO_U8VEC4(0x00000000);
+	// Reserved POI colors
+	const glm::u8vec4 mauve_color = HEX_TO_U8VEC4(0x8B687Fff);
 	const glm::u8vec4 gold_color = HEX_TO_U8VEC4(0xd1bf1bff);
 	const glm::u8vec4 red_color = HEX_TO_U8VEC4(0x8f071bff);
-	const glm::u8vec4 shadow_color = HEX_TO_U8VEC4(0x604d29ff);
-	const std::vector< glm::u8vec4 > rainbow_colors = {
-		HEX_TO_U8VEC4(0x604d29ff), HEX_TO_U8VEC4(0x624f29fc), HEX_TO_U8VEC4(0x69542df2),
-		HEX_TO_U8VEC4(0x6a552df1), HEX_TO_U8VEC4(0x6b562ef0), HEX_TO_U8VEC4(0x6b562ef0),
-		HEX_TO_U8VEC4(0x6d572eed), HEX_TO_U8VEC4(0x6f592feb), HEX_TO_U8VEC4(0x725b31e7),
-		HEX_TO_U8VEC4(0x745d31e3), HEX_TO_U8VEC4(0x755e32e0), HEX_TO_U8VEC4(0x765f33de),
-		HEX_TO_U8VEC4(0x7a6234d8), HEX_TO_U8VEC4(0x826838ca), HEX_TO_U8VEC4(0x977840a4),
-		HEX_TO_U8VEC4(0x96773fa5), HEX_TO_U8VEC4(0xa07f4493), HEX_TO_U8VEC4(0xa1814590),
-		HEX_TO_U8VEC4(0x9e7e4496), HEX_TO_U8VEC4(0xa6844887), HEX_TO_U8VEC4(0xa9864884),
-		HEX_TO_U8VEC4(0xad8a4a7c),
-	};
+	std::vector< glm::u8vec4 > rainbow_colors = {};
+	for (int i = 0; i < 21; i++) {
+		glm::u8vec4 faded_color = shadow_color;
+		faded_color.a -= i * (0xff / 21);
+		faded_color.r += i * (shadow_color_2.r / 63);
+		faded_color.g += i * (shadow_color_2.g / 63);
+		faded_color.b += i * (shadow_color_2.b / 63);
+		rainbow_colors.emplace_back(faded_color);
+	}
 	#undef HEX_TO_U8VEC4
 
 	//other useful drawing constants:
@@ -452,7 +513,17 @@ void PongMode::draw(glm::uvec2 const &drawable_size) {
 	// POIs
 	for (auto POI_iter = POIs.begin(); POI_iter != POIs.end(); POI_iter++) {
 		float radius = (*POI_iter).Radius;
-		draw_filled_circle((*POI_iter).Position, glm::vec2(radius, radius), fg_color);
+		if (POI_iter->rainbow) {
+			uint16_t c = 0;
+			float decr = 1.0f;
+			for (float inner_radius = radius; inner_radius > 0.0f; inner_radius -= decr) {
+				draw_filled_circle((*POI_iter).Position, glm::vec2(inner_radius, inner_radius), (c == 2) ? rand_color() : rand_colors[c]);
+				c = (c+1) % (sizeof(rand_colors)/sizeof(rand_colors[0]));
+				decr *= 0.85f;
+			}
+		} else {
+			draw_filled_circle((*POI_iter).Position, glm::vec2(radius, radius), mauve_color);
+		}
 	}
 
 	//shadows for everything (except the trail):
@@ -484,26 +555,34 @@ void PongMode::draw(glm::uvec2 const &drawable_size) {
 			glm::vec3 b = *(ti);
 			glm::vec2 at = (t - a.z) / (b.z - a.z) * (glm::vec2(b) - glm::vec2(a)) + glm::vec2(a);
 			//draw:
-			draw_rectangle(at, ball_radius, rainbow_colors[i]);
+			//draw_rectangle(at, ball_radius, rainbow_colors[i]);
+			draw_filled_circle(at, ball_radius, rainbow_colors[i]);
 		}
 	}
 
 	//solid objects:
 
 	//walls:
-	draw_rectangle(glm::vec2(-extreme_radius.x-wall_radius, 0.0f), glm::vec2(wall_radius, extreme_radius.y + 2.0f * wall_radius), fg_color);
-	draw_rectangle(glm::vec2(extreme_radius.x+wall_radius, 0.0f), glm::vec2(wall_radius, extreme_radius.y + 2.0f * wall_radius), fg_color);
-	draw_rectangle(glm::vec2( 0.0f,-extreme_radius.y-wall_radius), glm::vec2(extreme_radius.x, wall_radius), fg_color);
-	draw_rectangle(glm::vec2( 0.0f, extreme_radius.y+wall_radius), glm::vec2(extreme_radius.x, wall_radius), fg_color);
+	draw_rectangle(glm::vec2(-extreme_radius.x-wall_radius, 0.0f), glm::vec2(wall_radius, extreme_radius.y + 2.0f * wall_radius), paddle_color);
+	draw_rectangle(glm::vec2(extreme_radius.x+wall_radius, 0.0f), glm::vec2(wall_radius, extreme_radius.y + 2.0f * wall_radius), paddle_color);
+	draw_rectangle(glm::vec2( 0.0f,-extreme_radius.y-wall_radius), glm::vec2(extreme_radius.x, wall_radius), paddle_color);
+	draw_rectangle(glm::vec2( 0.0f, extreme_radius.y+wall_radius), glm::vec2(extreme_radius.x, wall_radius), paddle_color);
+
+	// Corner blocks:
+	draw_rectangle(TR_block, block_radius, paddle_color);
+	draw_rectangle(BR_block, block_radius, paddle_color);
+	draw_rectangle(BL_block, block_radius, paddle_color);
+	draw_rectangle(TL_block, block_radius, paddle_color);
 
 	//paddles:
-	draw_rectangle(left_paddle, vert_paddle_radius, fg_color);
-	draw_rectangle(right_paddle, vert_paddle_radius, fg_color);
-	draw_rectangle(bottom_paddle, horiz_paddle_radius, fg_color);
-	draw_rectangle(top_paddle, horiz_paddle_radius, fg_color);
+	draw_rectangle(left_paddle, vert_paddle_radius, paddle_color);
+	draw_rectangle(right_paddle, vert_paddle_radius, paddle_color);
+	draw_rectangle(bottom_paddle, horiz_paddle_radius, paddle_color);
+	draw_rectangle(top_paddle, horiz_paddle_radius, paddle_color);
 	
 	//ball:
-	draw_rectangle(ball, ball_radius, fg_color);
+	//draw_rectangle(ball, ball_radius, fg_color);
+	draw_filled_circle(ball, ball_radius, ball_color);
 
 	//scores:
 	/*glm::vec2 score_radius = glm::vec2(0.1f, 0.1f);
@@ -515,9 +594,17 @@ void PongMode::draw(glm::uvec2 const &drawable_size) {
 	}*/
 
 	//bricks:
-	for (auto bricks_iter = bricks.begin(); bricks_iter != bricks.end(); bricks_iter++) {
-		if (!(*bricks_iter).deleted) {
-			draw_rectangle((*bricks_iter).Position, (*bricks_iter).Radius, brick_color);
+	if (state_flipped) {
+		for (auto bricks_iter = bricks_flipped.begin(); bricks_iter != bricks_flipped.end(); bricks_iter++) {
+			if (!(*bricks_iter).deleted) {
+				draw_rectangle((*bricks_iter).Position, (*bricks_iter).Radius, brick_color);
+			}
+		}
+	} else {
+		for (auto bricks_iter = bricks.begin(); bricks_iter != bricks.end(); bricks_iter++) {
+			if (!(*bricks_iter).deleted) {
+				draw_rectangle((*bricks_iter).Position, (*bricks_iter).Radius, brick_color);
+			}
 		}
 	}
 
