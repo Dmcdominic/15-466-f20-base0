@@ -5,4 +5,8 @@ dist/pong.pdb
 dist/SDL2.dll
 dist/pong
 dist/pong.exe
+dist/Pongoria
+dist/Pongoria.pdb
+dist/Pongoria.ilk
+dist/Pongoria.exe
 Debug/

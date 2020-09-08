@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
 
 	//create window:
 	SDL_Window *window = SDL_CreateWindow(
-		"Skies of Pongora", //Remember to change title_cycle in PongMode.hpp if you change this
+		"Skies of Pongoria", //Remember to change title_cycle in PongMode.hpp if you change this
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		//640, 480,
 		800, 800, //window size
@@ -128,7 +128,8 @@ int main(int argc, char **argv) {
 					on_resize();
 				}
 				//handle input:
-				if (Mode::current && Mode::current->handle_event(evt, window_size)) {
+				bool QUIT = false;
+				if (Mode::current && Mode::current->handle_event(evt, window_size, &QUIT)) {
 					// mode handled it; great
 				} else if (evt.type == SDL_QUIT) {
 					Mode::set_current(nullptr);
@@ -147,6 +148,10 @@ int main(int argc, char **argv) {
 						px.a = 0xff;
 					}
 					save_png(filename, glm::uvec2(w,h), data.data(), LowerLeftOrigin);
+				}
+				if (QUIT) {
+					Mode::set_current(nullptr);
+					break;
 				}
 			}
 			if (!Mode::current) break;

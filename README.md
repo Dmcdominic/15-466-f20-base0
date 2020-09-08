@@ -1,8 +1,8 @@
-# (TODO: your game's title)
+# Skies of Pongoria
 
-Author: (TODO: your name)
+Author: Dominic Calkosz
 
-Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
+Design: An exploration Pong game.
 
 Screen Shot:
 
@@ -10,6 +10,7 @@ Screen Shot:
 
 How To Play:
 
-(TODO: describe the controls and (if needed) goals/strategy.)
+* Use your mouse to control the paddles.
+* Press 'Q' to quit.
 
 This game was built with [NEST](NEST.md).

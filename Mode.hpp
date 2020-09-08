@@ -16,13 +16,14 @@ struct Mode : std::enable_shared_from_this< Mode > {
 		glm::uvec2 position;
 		float opacity;
 		const char **title;
+		bool QUIT_ASAP = false;
 	};
 
 
 	//handle_event is called when new mouse or keyboard events are received:
 	// (note that this might be many times per frame or never)
 	//The function should return 'true' if it handled the event.
-	virtual bool handle_event(SDL_Event const &, glm::uvec2 const &window_size) { return false; }
+	virtual bool handle_event(SDL_Event const &, glm::uvec2 const &window_size, bool *QUIT) { return false; }
 
 	//update is called at the start of a new frame, after events are handled:
 	// 'elapsed' is time in seconds since the last call to 'update'
